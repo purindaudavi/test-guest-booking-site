@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a stay</title>
+  <link rel="stylesheet" href="/booking.css">
+  <script type="module" src="/live-booking.mjs"></script>
+</head>
+<body>
+  <main>
+    <header class="property-heading">
+      <div class="property-name">
+        <img id="property-logo" alt="" hidden>
+        <div>
+          <p id="property-location" hidden></p>
+          <h1 id="property-name">Book a stay</h1>
+        </div>
+      </div>
+      <div id="banner-frame" class="banner" hidden><img id="property-banner" alt=""></div>
+    </header>
+
+    <p id="page-status" class="notice" role="status">Loading the booking page…</p>
+
+    <section id="booking-search" aria-labelledby="search-title" hidden>
+      <div class="section-heading">
+        <h2 id="search-title">Find a room</h2>
+        <span class="payment-label">Pay at the property</span>
+      </div>http://localhost:3003/
+      <form id="search-form">
+        <div class="fields search-fields">
+          <label>Check-in<input id="check-in" name="checkIn" type="date" required></label>
+          <label>Check-out<input id="check-out" name="checkOut" type="date" required></label>
+          <label>Adults<input name="adults" type="number" min="1" max="30" value="2" required></label>
+          <label id="child-field" hidden>Children<input name="children" type="number" min="0" max="30" value="0" required></label>
+        </div>
+        <button type="submit">Search rooms</button>
+      </form>
+      <p id="child-policy" class="muted" hidden></p>
+      <p id="house-times" class="muted" hidden></p>
+    </section>
+
+    <section id="results" aria-label="Available rooms" hidden>
+      <p id="search-status" class="muted" role="status"></p>
+      <div id="offers"></div>
+    </section>
+
+    <section id="booking-details" aria-labelledby="booking-title" hidden>
+      <h2 id="booking-title" tabindex="-1">Your guest details</h2>
+      <p id="stay-summary"></p>
+      <p id="booking-terms" class="muted"></p>
+      <form id="booking-form">
+        <div class="fields">
+          <label>Full name<input name="name" autocomplete="name" minlength="2" maxlength="150" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" maxlength="40" required></label>
+          <label>Country<input name="country" autocomplete="country-name" minlength="2" maxlength="100" required></label>
+        </div>
+        <button type="submit">Confirm booking</button>
+      </form>
+      <p id="booking-status" class="notice" role="status" hidden></p>
+    </section>
+
+    <section id="confirmation" aria-labelledby="confirmation-title" hidden>
+      <h2 id="confirmation-title" tabindex="-1">Booking confirmed</h2>
+      <p id="confirmation-summary"></p>
+      <p>Booking reference <strong id="confirmation-reference"></strong></p>
+      <p class="muted">Save your reference for check-in. Payment is due at the property.</p>
+      <button id="search-again" class="secondary" type="button">Find another room</button>
+    </section>
+  </main>
+</body>
+</html>
+

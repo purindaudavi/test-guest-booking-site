@@ -1,0 +1,136 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Search room availability and book directly with the hotel.">
+  <meta name="theme-color" content="#18382f">
+  <title>Book your stay</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preload" as="image" href="/images/coast.webp">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="/" aria-label="Hotel home">
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="hotel-name">Book your stay</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="#rooms">Rooms</a>
+        <a class="nav-link" href="#the-stay">The stay</a>
+        <a class="button button-small" href="#booking">Book now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <p class="eyebrow" id="hotel-location"></p>
+        <h1 id="hero-title">A stay to <br>look forward to.</h1>
+        <p>Choose your dates and find a room for your next stay.</p>
+      </div>
+    </section>
+
+    <section class="wrap availability" id="booking" aria-label="Check room availability">
+      <form id="availability-form" class="search-card">
+        <label>Check-in <input required type="date" name="arrival" aria-describedby="availability-note"></label>
+        <label>Check-out <input required type="date" name="departure"></label>
+        <label>Guests
+          <select name="guests">
+            <option value="1">1 guest</option>
+            <option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+          </select>
+        </label>
+        <button class="button" type="submit">Check availability</button>
+      </form>
+      <p id="availability-note" class="sample-note">Loading hotel availability...</p>
+      <p id="search-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="wrap room-section" id="rooms" aria-labelledby="rooms-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Make yourself at home</p>
+          <h2 id="rooms-title">Find your room</h2>
+        </div>
+        <p id="room-summary" class="room-summary" role="status">Choose your dates to see the total for your stay.</p>
+      </div>
+      <div id="room-list" class="room-list"></div>
+      <noscript><p>Enable JavaScript to search rooms and make a booking.</p></noscript>
+    </section>
+
+    <section class="stay-section" id="the-stay" aria-labelledby="stay-title">
+      <div class="wrap stay-inner">
+        <div>
+          <p class="eyebrow">The stay</p>
+          <h2 id="stay-title">Your time, at your pace.</h2>
+        </div>
+        <div>
+          <p>A quiet morning by the pool, an afternoon in the garden, and a comfortable room to come back to.</p>
+          <dl class="house-rules" id="house-rules" hidden></dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div><strong id="footer-hotel-name">Book your stay</strong><p id="footer-location"></p></div>
+      <p>Direct hotel booking</p>
+    </div>
+  </footer>
+
+  <template id="room-template">
+    <article class="room-card">
+      <img class="room-photo" width="720" height="430" loading="lazy" alt="">
+      <div class="room-content">
+        <div class="room-top">
+          <h3></h3>
+          <span class="room-capacity"></span>
+        </div>
+        <p class="room-description"></p>
+        <div class="room-footer">
+          <p><span class="price-caption"></span><strong class="room-price"></strong></p>
+          <button class="button button-outline room-action" type="button"></button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <dialog id="booking-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <button class="close-button" type="button" aria-label="Close booking" id="close-booking">×</button>
+      <section id="guest-panel">
+        <p class="eyebrow">Direct reservation</p>
+        <h2 id="dialog-title">Your stay</h2>
+        <div id="booking-summary" class="booking-summary"></div>
+        <form id="guest-form">
+          <p class="form-note">Enter your contact details to confirm your stay.</p>
+          <label>Guest name <input name="guestName" placeholder="e.g. Nimal Perera" required minlength="2" maxlength="150" autocomplete="name" autofocus></label>
+          <label>Email <input name="email" type="email" autocomplete="email" placeholder="guest@example.com" required maxlength="254"></label>
+          <label>Phone <input name="phone" type="tel" autocomplete="tel" required maxlength="40"></label>
+          <label>Country <input name="country" autocomplete="country-name" required minlength="2" maxlength="100"></label>
+          <p id="booking-terms" class="form-note"></p>
+          <p class="payment-note"><strong>Pay at the property</strong><br>Payment is due at the property.</p>
+          <p id="booking-error" class="error" role="alert" hidden></p>
+          <button class="button submit-booking" type="submit">Confirm booking</button>
+        </form>
+      </section>
+      <section id="confirmation" hidden aria-labelledby="confirmation-title">
+        <p class="eyebrow">Direct reservation</p>
+        <h2 id="confirmation-title" tabindex="-1">Booking confirmed</h2>
+        <p>Save your booking reference for check-in.</p>
+        <div id="receipt" class="booking-summary"></div>
+        <button type="button" class="button submit-booking" id="done-booking">Done</button>
+      </section>
+    </div>
+  </dialog>
+</body>
+</html>

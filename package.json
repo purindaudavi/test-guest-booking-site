@@ -1,0 +1,14 @@
+{
+  "name": "guest-booking-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.mjs",
+    "start": "node server.mjs",
+    "check": "node --check server.mjs && node --check public/app.mjs && node --check public/demo-booking.mjs && node --check public/live-booking.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
